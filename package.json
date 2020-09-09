@@ -1,0 +1,10 @@
+{
+  "name": "eslint-plugin-funding-options",
+  "version": "0.1.0",
+  "description": "funding options custom lint rules",
+  "author": "Tom Parsons",
+  "main": "rules/index.js",
+  "scripts": {
+    "test": "../../../node_modules/jest/bin/jest.js"
+  }
+}
