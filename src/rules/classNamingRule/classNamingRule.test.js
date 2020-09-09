@@ -1,5 +1,5 @@
-const RuleTester = require('eslint').RuleTester; // eslint-disable-line
-const lib = require('../rules');
+import {RuleTester} from 'eslint';
+import {classNamingRule} from './classNamingRule';
 
 RuleTester.setDefaultConfig({
   parserOptions: {
@@ -12,7 +12,7 @@ RuleTester.setDefaultConfig({
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('classNaming', lib.rules.classNaming, {
+ruleTester.run('classNaming', classNamingRule, {
   valid: [
     {
       code: '<div className="helloWorld" />',
