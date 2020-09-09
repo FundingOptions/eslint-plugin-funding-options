@@ -1,9 +1,15 @@
 {
-  "name": "eslint-plugin-funding-options",
-  "version": "0.1.0",
+  "name": "@fundingoptions/eslint-plugin-funding-options",
+  "version": "1.0.0",
   "description": "funding options custom lint rules",
-  "author": "Tom Parsons",
-  "main": "rules/index.js",
+  "author": "Funding Options Ltd",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FundingOptions/eslint-plugin-funding-options"
+  },
+  "main": "lib/index.js",
+  "sideEffects": false,
   "scripts": {
     "test": "jest"
   },
