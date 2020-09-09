@@ -1,1 +1,5 @@
-export {classNamingRule} from './rules/classNamingRule/classNamingRule';
+import { classNamingRule } from "./rules/classNamingRule/classNamingRule";
+
+export default {
+  classNamingRule,
+};
