@@ -47,7 +47,7 @@ const testClassName = (context, node) => {
       return false;
     }
 
-    const camelCasedClassName = className.charAt(0).toLowerCase() + className.slice(1);
+    const updatedClassName = value.replace(className, className.charAt(0).toLowerCase() + className.slice(1));
 
     context.report({
       fix: (fixer) => {
@@ -55,7 +55,7 @@ const testClassName = (context, node) => {
           return null;
         }
 
-        return fixer.replaceTextRange([firstLetterInRange, lastLetterInRange], camelCasedClassName);
+        return fixer.replaceTextRange([firstLetterInRange, lastLetterInRange], updatedClassName);
       },
       message: 'class name should be camelCase',
       node
