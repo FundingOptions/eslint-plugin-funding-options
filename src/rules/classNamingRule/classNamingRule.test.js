@@ -160,6 +160,17 @@ ruleTester.run('classNaming', classNamingRule, {
       options: [{fix: true}],
       output: 'function Accordion(props) { return (<div className="helloWorld hiThere">hello world</div>)}'
     },
+    { // weird example
+      code: 'function Accordion(props) { return (<div className="helloWorld HelloWorld__whatever">hello world</div>)}',
+      errors: [
+        {
+          message: 'class name should be camelCase',
+          type: 'JSXIdentifier'
+        }
+      ],
+      options: [{fix: true}],
+      output: 'function Accordion(props) { return (<div className="helloWorld helloWorld__whatever">hello world</div>)}'
+    },
 
     // with fix = false, camelCasing
     {
