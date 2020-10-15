@@ -14,6 +14,8 @@ const testClassName = (context, node) => {
     return false;
   }
 
+  /* check for spaces at the start and end of the string Literal */
+
   const firstLetter = value[0];
   const lastLetter = value[value.length - 1];
   const canFix = context.options.length > 0 && context.options[0].fix;
@@ -36,25 +38,31 @@ const testClassName = (context, node) => {
     return true;
   }
 
-  if (firstLetter !== firstLetter.toUpperCase()) {
-    return false;
-  }
+  /* check each word in the string Literal for its casing */
+  const classNameArray = value.split(" ")
 
-  const camelCasedClassName = value.charAt(0).toLowerCase() + value.slice(1);
+  classNameArray.forEach(className => {
+    const classNameFirstLetter = className[0];
+    if (classNameFirstLetter !== classNameFirstLetter.toUpperCase()) {
+      return false;
+    }
 
-  context.report({
-    fix: (fixer) => {
-      if (!canFix) {
-        return null;
-      }
+    const updatedClassName = value.replace(className, className.charAt(0).toLowerCase() + className.slice(1));
 
-      return fixer.replaceTextRange([firstLetterInRange, lastLetterInRange], camelCasedClassName);
-    },
-    message: 'class name should be camelCase',
-    node
+    context.report({
+      fix: (fixer) => {
+        if (!canFix) {
+          return null;
+        }
+
+        return fixer.replaceTextRange([firstLetterInRange, lastLetterInRange], updatedClassName);
+      },
+      message: 'class name should be camelCase',
+      node
+    });
+
+    return true;
   });
-
-  return true;
 };
 
 export const classNamingRule = {

@@ -35,3 +35,7 @@ function FancyProfileCard() {
   return <div className="FancyProfileCard" />;
 }
 ```
+
+## Pull Requests
+
+Please run `npm run build | yarn build` before submitting a PR for the time being
