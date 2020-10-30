@@ -1,6 +1,6 @@
 {
   "name": "@fundingoptions/eslint-plugin-funding-options",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "funding options custom lint rules",
   "author": "Funding Options Ltd",
   "license": "MIT",
