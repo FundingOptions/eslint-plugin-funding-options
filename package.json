@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/FundingOptions/eslint-plugin-funding-options"
+    "url": "git+https://github.com/FundingOptions/eslint-plugin-funding-options.git"
   },
   "main": "lib/index.js",
   "module": "src/index.mjs",
@@ -25,5 +25,15 @@
   },
   "peerDependencies": {
     "eslint": "^4.0.0 || ^5.0.0 || ^6.0.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/FundingOptions/eslint-plugin-funding-options/issues"
+  },
+  "homepage": "https://github.com/FundingOptions/eslint-plugin-funding-options#readme",
+  "directories": {
+    "lib": "lib"
+  },
+  "keywords": [
+    "eslint"
+  ]
 }
