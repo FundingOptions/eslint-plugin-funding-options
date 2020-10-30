@@ -2,13 +2,19 @@
 
 ## How to use
 
+To install:
+
+```
+npm i @fundingoptions/eslint-plugin-funding-options --save-dev
+```
+
 In .eslintrc.js
 
 ```js
 module.exports = {
-  plugins: ["eslint-plugin-funding-options"],
+  plugins: ["@fundingoptions/eslint-plugin-funding-options"],
   rules: {
-    "funding-options/classNaming": 2,
+    "@fundingoptions/funding-options/classNaming": 2,
   },
 };
 ```
