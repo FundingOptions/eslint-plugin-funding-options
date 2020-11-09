@@ -5,9 +5,9 @@ RuleTester.setDefaultConfig({
   parserOptions: {
     ecmaVersion: 6,
     ecmaFeatures: {
-      jsx: true
-    }
-  }
+      jsx: true,
+    },
+  },
 });
 
 const ruleTester = new RuleTester();
@@ -16,59 +16,60 @@ ruleTester.run('classNaming', classNamingRule, {
   valid: [
     {
       code: '<div className="helloWorld" />',
-      options: []
+      options: [],
     },
     {
       code: '<div />',
-      options: []
+      options: [],
     },
     {
       code: 'function Accordion(props) { return (<div className="accordion">hello world</div>)}',
-      options: []
+      options: [],
     },
     {
       code: 'function Accordion(props) { return (<div className="accordion extraClassName">hello world</div>)}',
-      options: []
+      options: [],
     },
     {
-      code: 'function Accordion(props) { return (<div className="accordion extraClassName anotherClassName">hello world</div>)}',
-      options: []
-    }
+      code:
+        'function Accordion(props) { return (<div className="accordion extraClassName anotherClassName">hello world</div>)}',
+      options: [],
+    },
   ],
   invalid: [
     // with fix = true, camelCasing
-     {
+    {
       code: '<div className="HelloWorld" />',
       errors: [
         {
           message: 'class name should be camelCase',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: true}],
-      output: '<div className="helloWorld" />'
+      output: '<div className="helloWorld" />',
     },
     {
       code: '<div className="Accordion">hello world</div>',
       errors: [
         {
           message: 'class name should be camelCase',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: true}],
-      output: '<div className="accordion">hello world</div>'
+      output: '<div className="accordion">hello world</div>',
     },
     {
       code: 'function Accordion(props) { return (<div className="Accordion">hello world</div>)}',
       errors: [
         {
           message: 'class name should be camelCase',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: true}],
-      output: 'function Accordion(props) { return (<div className="accordion">hello world</div>)}'
+      output: 'function Accordion(props) { return (<div className="accordion">hello world</div>)}',
     },
     // with fix = true, whitespace
     {
@@ -76,66 +77,66 @@ ruleTester.run('classNaming', classNamingRule, {
       errors: [
         {
           message: 'class name should be not have whitespace at start or end',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: true}],
-      output: '<div className="helloWorld" />'
+      output: '<div className="helloWorld" />',
     },
     {
       code: '<div className=" helloWorld" />',
       errors: [
         {
           message: 'class name should be not have whitespace at start or end',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: true}],
-      output: '<div className="helloWorld" />'
+      output: '<div className="helloWorld" />',
     },
     {
       code: '<div className="helloWorld " />',
       errors: [
         {
           message: 'class name should be not have whitespace at start or end',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: true}],
-      output: '<div className="helloWorld" />'
+      output: '<div className="helloWorld" />',
     },
     {
       code: '<div className=" helloWorld ">hello world</div>',
       errors: [
         {
           message: 'class name should be not have whitespace at start or end',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: true}],
-      output: '<div className="helloWorld">hello world</div>'
+      output: '<div className="helloWorld">hello world</div>',
     },
     {
       code: '<div className=" helloWorld hiThere    ">hello world</div>',
       errors: [
         {
           message: 'class name should be not have whitespace at start or end',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: true}],
-      output: '<div className="helloWorld hiThere">hello world</div>'
+      output: '<div className="helloWorld hiThere">hello world</div>',
     },
     {
       code: 'function Accordion(props) { return (<div className=" helloWorld ">hello world</div>)}',
       errors: [
         {
           message: 'class name should be not have whitespace at start or end',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: true}],
-      output: 'function Accordion(props) { return (<div className="helloWorld">hello world</div>)}'
+      output: 'function Accordion(props) { return (<div className="helloWorld">hello world</div>)}',
     },
     // with fix = true, multi word classNames
     {
@@ -143,33 +144,35 @@ ruleTester.run('classNaming', classNamingRule, {
       errors: [
         {
           message: 'class name should be camelCase',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: true}],
-      output: 'function Accordion(props) { return (<div className="helloWorld hiThere">hello world</div>)}'
+      output: 'function Accordion(props) { return (<div className="helloWorld hiThere">hello world</div>)}',
     },
     {
       code: 'function Accordion(props) { return (<div className="HelloWorld hiThere">hello world</div>)}',
       errors: [
         {
           message: 'class name should be camelCase',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: true}],
-      output: 'function Accordion(props) { return (<div className="helloWorld hiThere">hello world</div>)}'
+      output: 'function Accordion(props) { return (<div className="helloWorld hiThere">hello world</div>)}',
     },
-    { // weird example
+    {
+      // weird example
       code: 'function Accordion(props) { return (<div className="helloWorld HelloWorld__whatever">hello world</div>)}',
       errors: [
         {
           message: 'class name should be camelCase',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: true}],
-      output: 'function Accordion(props) { return (<div className="helloWorld helloWorld__whatever">hello world</div>)}'
+      output:
+        'function Accordion(props) { return (<div className="helloWorld helloWorld__whatever">hello world</div>)}',
     },
 
     // with fix = false, camelCasing
@@ -178,11 +181,11 @@ ruleTester.run('classNaming', classNamingRule, {
       errors: [
         {
           message: 'class name should be camelCase',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: false}],
-      output: 'function Accordion(props) { return (<div className="Accordion">hello world</div>)}'
+      output: 'function Accordion(props) { return (<div className="Accordion">hello world</div>)}',
     },
     // no fix option - camelCase
     {
@@ -190,11 +193,11 @@ ruleTester.run('classNaming', classNamingRule, {
       errors: [
         {
           message: 'class name should be camelCase',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [],
-      output: 'function Accordion(props) { return (<div className="Accordion">hello world</div>)}'
+      output: 'function Accordion(props) { return (<div className="Accordion">hello world</div>)}',
     },
     // with fix = false, whitespace
     {
@@ -202,11 +205,11 @@ ruleTester.run('classNaming', classNamingRule, {
       errors: [
         {
           message: 'class name should be not have whitespace at start or end',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: false}],
-      output: 'function Accordion(props) { return (<div className=" helloWorld ">hello world</div>)}'
+      output: 'function Accordion(props) { return (<div className=" helloWorld ">hello world</div>)}',
     },
     // no fix option - whitespace
     {
@@ -214,11 +217,11 @@ ruleTester.run('classNaming', classNamingRule, {
       errors: [
         {
           message: 'class name should be not have whitespace at start or end',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [],
-      output: 'function Accordion(props) { return (<div className=" helloWorld ">hello world</div>)}'
+      output: 'function Accordion(props) { return (<div className=" helloWorld ">hello world</div>)}',
     },
 
     // with fix = false, multi word classNames
@@ -227,11 +230,11 @@ ruleTester.run('classNaming', classNamingRule, {
       errors: [
         {
           message: 'class name should be camelCase',
-          type: 'JSXIdentifier'
-        }
+          type: 'JSXIdentifier',
+        },
       ],
       options: [{fix: false}],
-      output: 'function Accordion(props) { return (<div className="helloWorld HiThere">hello world</div>)}'
+      output: 'function Accordion(props) { return (<div className="helloWorld HiThere">hello world</div>)}',
     },
-  ]
+  ],
 });

@@ -33,15 +33,15 @@ const testClassName = (context, node) => {
         return fixer.replaceTextRange([firstLetterInRange, lastLetterInRange], value.trim());
       },
       message: 'class name should be not have whitespace at start or end',
-      node
+      node,
     });
     return true;
   }
 
   /* check each word in the string Literal for its casing */
-  const classNameArray = value.split(" ")
+  const classNameArray = value.split(' ');
 
-  classNameArray.forEach(className => {
+  classNameArray.forEach((className) => {
     const classNameFirstLetter = className[0];
     if (classNameFirstLetter !== classNameFirstLetter.toUpperCase()) {
       return false;
@@ -58,7 +58,7 @@ const testClassName = (context, node) => {
         return fixer.replaceTextRange([firstLetterInRange, lastLetterInRange], updatedClassName);
       },
       message: 'class name should be camelCase',
-      node
+      node,
     });
 
     return true;
@@ -69,7 +69,7 @@ export const classNamingRule = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'enforce camel casing, whitespace trimming for JSX classnames'
+      description: 'enforce camel casing, whitespace trimming for JSX classnames',
     },
     fixable: 'code',
     schema: [
@@ -77,18 +77,18 @@ export const classNamingRule = {
         type: 'object',
         properties: {
           fix: {
-            type: 'boolean'
-          }
+            type: 'boolean',
+          },
         },
-        additionalProperties: false
-      }
-    ]
+        additionalProperties: false,
+      },
+    ],
   },
   create: (context) => {
     return {
       JSXIdentifier(node) {
         testClassName(context, node, context.options.length ? context.options[0] : {});
-      }
+      },
     };
-  }
+  },
 };
