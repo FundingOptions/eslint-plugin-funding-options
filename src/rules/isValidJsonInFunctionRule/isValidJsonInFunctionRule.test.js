@@ -24,19 +24,15 @@ ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
     },
     {
       code: 'getPageRoute("conversion.url")',
-      options: [{functionName: 'getPageRoute', argumentPosition: 0, sourceObject: {conversion: {url: '/helloWorld'}}}],
+      options: [{functionName: 'getPageRoute', sourceObject: {conversion: {url: '/helloWorld'}}}],
     },
     {
       code: 'getPageRoute("conversion.url.home")',
-      options: [
-        {functionName: 'getPageRoute', argumentPosition: 0, sourceObject: {conversion: {url: {home: '/helloWorld'}}}},
-      ],
+      options: [{functionName: 'getPageRoute', sourceObject: {conversion: {url: {home: '/helloWorld'}}}}],
     },
     {
       code: 'const abc = getPageRoute("conversion.url.home");',
-      options: [
-        {functionName: 'getPageRoute', argumentPosition: 0, sourceObject: {conversion: {url: {home: '/helloWorld'}}}},
-      ],
+      options: [{functionName: 'getPageRoute', sourceObject: {conversion: {url: {home: '/helloWorld'}}}}],
     },
     // check that the argumentPosition argument works
     {
@@ -78,7 +74,7 @@ ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
           type: 'Identifier',
         },
       ],
-      options: [{functionName: 'getPageRoute', argumentPosition: 0, sourceObject: {conversion1: '/helloWorld'}}],
+      options: [{functionName: 'getPageRoute', sourceObject: {conversion1: '/helloWorld'}}],
     },
     {
       code: 'getPageRoute("conversion.url")',
@@ -88,7 +84,7 @@ ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
           type: 'Identifier',
         },
       ],
-      options: [{functionName: 'getPageRoute', argumentPosition: 0, sourceObject: {conversion1: '/helloWorld'}}],
+      options: [{functionName: 'getPageRoute', sourceObject: {conversion1: '/helloWorld'}}],
     },
     {
       code: 'getPageRoute("conversion.url")',
@@ -98,9 +94,7 @@ ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
           type: 'Identifier',
         },
       ],
-      options: [
-        {functionName: 'getPageRoute', argumentPosition: 0, sourceObject: {conversion: {'url1:': '/helloWorld'}}},
-      ],
+      options: [{functionName: 'getPageRoute', sourceObject: {conversion: {'url1:': '/helloWorld'}}}],
     },
     {
       code: 'getPageRoute("conversion.url.home")',
@@ -113,7 +107,6 @@ ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
       options: [
         {
           functionName: 'getPageRoute',
-          argumentPosition: 0,
           sourceObject: {conversion: {'url1:': {home: '/helloWorld'}}},
         },
       ],
@@ -129,7 +122,6 @@ ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
       options: [
         {
           functionName: 'getPageRoute',
-          argumentPosition: 0,
           splitOn: '--',
           sourceObject: {conversion: {'url:': {home: '/helloWorld'}}},
         },
