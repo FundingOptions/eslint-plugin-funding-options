@@ -13,6 +13,14 @@ RuleTester.setDefaultConfig({
 const ruleTester = new RuleTester();
 
 ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
-  valid: [],
+  valid: [
+    {
+      code: 'getPageRoute("conversion")',
+      options: [{functionName: 'getPageRoute', sourceObject: { "conversion": "/helloWorld" }}]
+    }, {
+      code: 'getPageRoute("conversion")',
+      options: [{functionName: 'getPageRoute', argumentPosition: 0, sourceObject: { "conversion": "/helloWorld" }}]
+    },
+  ],
   invalid: []
 });
