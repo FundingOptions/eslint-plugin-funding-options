@@ -1,21 +1,16 @@
-function getNested(obj, args) {
-  return args.reduce((obj, level) => obj && obj[level], obj)
-}
-
 const testFunctionParameters = (context, node) => {
   if (node.type !== 'Identifier') {
     return false;
   }
-  const {argumentPosition, functionName, splitOn, sourceObject} = context.options[0]
+  const {argumentPosition, functionName, sourceObject, splitOn} = context.options[0]
 
   if (node.name !== functionName) {
     return false;
   }
 
-  const functionArgumentToValidate = node.parent.arguments[argumentPosition || 0].value
+  const functionArgumentToValidate = node.parent.arguments[argumentPosition || 0].value;
   const objectKeysToValidate = functionArgumentToValidate.split(splitOn || '.');
-
-  const isValidArgument = getNested(sourceObject, objectKeysToValidate)
+  const isValidArgument = objectKeysToValidate.reduce((sourceObject, level) => sourceObject && sourceObject[level], sourceObject);
 
   if (!isValidArgument) {
     context.report({
@@ -45,11 +40,11 @@ export const isValidJsonInFunctionRule = {
           functionName: {
             type: 'string'
           },
-          splitOn: {
-            type: 'string',
-          },
           sourceObject: {
             type: 'object',
+          },
+          splitOn: {
+            type: 'string',
           }
         },
         additionalProperties: false

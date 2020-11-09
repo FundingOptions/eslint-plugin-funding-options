@@ -26,6 +26,9 @@ ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
     }, {
       code: 'getPageRoute("conversion.url.home")',
       options: [{functionName: 'getPageRoute', argumentPosition: 0, sourceObject: { "conversion": { "url": { "home": "/helloWorld" }} }}]
+    }, {
+      code: 'const abc = getPageRoute("conversion.url.home");',
+      options: [{functionName: 'getPageRoute', argumentPosition: 0, sourceObject: { "conversion": { "url": { "home": "/helloWorld" }} }}]
     },
     // check that the argumentPosition argument works
     {
@@ -79,7 +82,16 @@ ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
           type: 'Identifier'
         }
       ],
-      options: [{functionName: 'getPageRoute', argumentPosition: 0, sourceObject: { "conversion": {"url:": {"home": "/helloWorld" }}}}]
+      options: [{functionName: 'getPageRoute', argumentPosition: 0, sourceObject: { "conversion": {"url1:": {"home": "/helloWorld" }}}}]
+    }, {
+      code: 'getPageRoute("conversion.url.home")',
+      errors: [
+        {
+          message: 'conversion.url.home is not a valid identifier',
+          type: 'Identifier'
+        }
+      ],
+      options: [{functionName: 'getPageRoute', argumentPosition: 0, splitOn: "--", sourceObject: { "conversion": {"url:": {"home": "/helloWorld" }}}}]
     },
   ]
 });
