@@ -16,6 +16,7 @@ const testFunctionParameters = (context, node) => {
       message: `${functionArgumentToValidate} is not a valid identifier`,
       node
     });
+
     return true;
   }
 
