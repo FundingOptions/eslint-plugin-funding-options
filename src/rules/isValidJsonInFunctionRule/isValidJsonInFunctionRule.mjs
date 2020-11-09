@@ -8,8 +8,17 @@ const testFunctionParameters = (context, node) => {
     return false;
   }
 
-  const functionArgumentToValidate = node.parent.arguments[argumentPosition || 0].value;
-  const objectKeysToValidate = functionArgumentToValidate.split(splitOn || '.');
+  if (!node.parent.arguments || node.parent.arguments.length === 0) {
+    return false
+  }
+
+  const functionArgumentToValidate = node.parent.arguments[argumentPosition || 0];
+  if (!functionArgumentToValidate || !functionArgumentToValidate.value) {
+    return false;
+  }
+
+  const functionArgumentValueToValidate = functionArgumentToValidate.value;
+  const objectKeysToValidate = functionArgumentValueToValidate.split(splitOn || '.');
   const isValidArgument = objectKeysToValidate.reduce(
     (sourceObject, level) => sourceObject && sourceObject[level],
     sourceObject
@@ -17,7 +26,7 @@ const testFunctionParameters = (context, node) => {
 
   if (!isValidArgument) {
     context.report({
-      message: `${functionArgumentToValidate} is not a valid identifier`,
+      message: `${functionArgumentValueToValidate} is not a valid identifier`,
       node,
     });
 
