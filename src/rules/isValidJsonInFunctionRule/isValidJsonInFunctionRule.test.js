@@ -26,12 +26,21 @@ ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
     }, {
       code: 'getPageRoute("conversion.url.home")',
       options: [{functionName: 'getPageRoute', argumentPosition: 0, sourceObject: { "conversion": { "url": { "home": "/helloWorld" }} }}]
-    }, {
+    },
+    // check that the argumentPosition argument works
+    {
       code: 'getPageRoute("whatever", "conversion.url.home")',
       options: [{functionName: 'getPageRoute', argumentPosition: 1, sourceObject: { "conversion": { "url": { "home": "/helloWorld" }} }}]
-    }, {
+    },
+    // check that the functionName argument works
+    {
       code: 'getPageRouteVars("whatever", "conversion.url.home")',
       options: [{functionName: 'getPageRouteVars', argumentPosition: 1, sourceObject: { "conversion": { "url": { "home": "/helloWorld" }} }}]
+    },
+    // check that the splitOn argument works
+    {
+      code: 'getPageRouteVars("whatever", "conversion--url--home")',
+      options: [{functionName: 'getPageRouteVars', argumentPosition: 1, splitOn: "--", sourceObject: { "conversion": { "url": { "home": "/helloWorld" }} }}]
     },
   ],
   invalid: [
@@ -44,7 +53,7 @@ ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
         }
       ],
       options: [{functionName: 'getPageRoute', argumentPosition: 0, sourceObject: { "conversion1": "/helloWorld" }}]
-    },     {
+    }, {
       code: 'getPageRoute("conversion.url")',
       errors: [
         {
@@ -53,7 +62,7 @@ ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
         }
       ],
       options: [{functionName: 'getPageRoute', argumentPosition: 0, sourceObject: { "conversion1": "/helloWorld" }}]
-    },    {
+    }, {
       code: 'getPageRoute("conversion.url")',
       errors: [
         {
@@ -62,7 +71,7 @@ ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
         }
       ],
       options: [{functionName: 'getPageRoute', argumentPosition: 0, sourceObject: { "conversion": {"url1:": "/helloWorld" }}}]
-    },    {
+    }, {
       code: 'getPageRoute("conversion.url.home")',
       errors: [
         {

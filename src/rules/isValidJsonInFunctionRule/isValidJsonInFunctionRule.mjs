@@ -45,6 +45,9 @@ export const isValidJsonInFunctionRule = {
           functionName: {
             type: 'string'
           },
+          splitOn: {
+            type: 'string',
+          },
           sourceObject: {
             type: 'object',
           }
