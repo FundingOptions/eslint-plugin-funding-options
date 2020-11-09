@@ -1,15 +1,21 @@
+function getNested(obj, args) {
+  return args.reduce((obj, level) => obj && obj[level], obj)
+}
+
 const testFunctionParameters = (context, node) => {
   if (node.type !== 'Identifier') {
     return false;
   }
-  const {argumentPosition, functionName, sourceObject} = context.options[0]
+  const {argumentPosition, functionName, splitOn, sourceObject} = context.options[0]
 
   if (node.name !== functionName) {
     return false;
   }
 
   const functionArgumentToValidate = node.parent.arguments[argumentPosition || 0].value
-  const isValidArgument = sourceObject.hasOwnProperty(functionArgumentToValidate)
+  const objectKeysToValidate = functionArgumentToValidate.split(splitOn || '.');
+
+  const isValidArgument = getNested(sourceObject, objectKeysToValidate)
 
   if (!isValidArgument) {
     context.report({

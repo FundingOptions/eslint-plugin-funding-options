@@ -37,7 +37,7 @@ ruleTester.run('classNaming', classNamingRule, {
   ],
   invalid: [
     // with fix = true, camelCasing
-    {
+     {
       code: '<div className="HelloWorld" />',
       errors: [
         {

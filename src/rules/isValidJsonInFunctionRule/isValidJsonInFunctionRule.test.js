@@ -26,6 +26,12 @@ ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
     }, {
       code: 'getPageRoute("conversion.url.home")',
       options: [{functionName: 'getPageRoute', argumentPosition: 0, sourceObject: { "conversion": { "url": { "home": "/helloWorld" }} }}]
+    }, {
+      code: 'getPageRoute("whatever", "conversion.url.home")',
+      options: [{functionName: 'getPageRoute', argumentPosition: 1, sourceObject: { "conversion": { "url": { "home": "/helloWorld" }} }}]
+    }, {
+      code: 'getPageRouteVars("whatever", "conversion.url.home")',
+      options: [{functionName: 'getPageRouteVars', argumentPosition: 1, sourceObject: { "conversion": { "url": { "home": "/helloWorld" }} }}]
     },
   ],
   invalid: [
