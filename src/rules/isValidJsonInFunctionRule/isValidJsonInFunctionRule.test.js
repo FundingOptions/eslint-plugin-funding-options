@@ -12,6 +12,16 @@ RuleTester.setDefaultConfig({
 
 const ruleTester = new RuleTester();
 
+const jsonUrls = JSON.stringify({
+  conversion: {
+    url: {
+      home: {
+        url: '/helloWorld',
+      },
+    },
+  },
+});
+
 ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
   valid: [
     {
@@ -34,6 +44,16 @@ ruleTester.run('isValidJsonInFunction', isValidJsonInFunctionRule, {
       code: 'const abc = getPageRoute("conversion.url.home");',
       options: [{functionName: 'getPageRoute', sourceObject: {conversion: {url: {home: '/helloWorld'}}}}],
     },
+    {
+      code: 'const abc = getPageRoute("conversion.url.home.url");',
+      options: [{functionName: 'getPageRoute', sourceObject: {conversion: {url: {home: {url: '/helloWorld'}}}}}],
+    },
+    // check json parse
+    {
+      code: 'const abc = getPageRoute("conversion.url.home.url");',
+      options: [{functionName: 'getPageRoute', sourceObject: JSON.parse(jsonUrls)}],
+    },
+
     // check that the argumentPosition argument works
     {
       code: 'getPageRoute("whatever", "conversion.url.home")',
